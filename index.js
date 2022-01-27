@@ -17,13 +17,7 @@ app.use(express.static(__dirname + '/views/build'));
 
 app.post('/api/create', (req, res) => {
   console.log(req.body);
-  let { name } = req.body;
-  console.log(name);
-  // const name = req.body.name;
-  const age = req.body.age;
-  const country = req.body.country;
-  const position = req.body.position;
-  const wage = req.body.wage;
+  let { name, age, country, position, wage } = req.body;
 
   db.query(
     'INSERT INTO employees (name, age, country, position, wage) VALUES (?,?,?,?,?)',
@@ -32,7 +26,7 @@ app.post('/api/create', (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        res.send('Values');
+        res.send('Values Inserted');
       }
     }
   );
@@ -51,6 +45,7 @@ app.get('/api/employees', (req, res) => {
 app.put('/api/update', (req, res) => {
   const id = req.body.id;
   const wage = req.body.wage;
+  console.log(id, wage, 'HELLOOOOO');
   db.query(
     'UPDATE employees SET wage = ? WHERE id = ?',
     [wage, id],
