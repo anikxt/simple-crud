@@ -1,0 +1,12 @@
+{
+  "name": "simple-crud",
+  "version": "1.0.0",
+  "description": "IDKKKKKKKKKKKKKKKKKKK'",
+  "scripts": {
+    "install": "cd server && npm install && cd ../client && npm install && cd ../",
+    "build": "cd client && npm run build && mkdir ../server/public && cp -r build/* ../server/public",
+    "start": "cd server && npm start"
+  },
+  "author": "Aniket Kanere",
+  "license": "ISC"
+}
