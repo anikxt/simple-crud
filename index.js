@@ -6,15 +6,20 @@ const mysql = require('mysql2');
 const cors = require('cors');
 
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+var bodyParser = require('body-parser');
+
+app.use('/', express.static(__dirname));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json()); // support json encoded bodies
 const db = mysql.createConnection(process.env.MYSQL_URL);
 
 app.use(express.static(__dirname + '/views/build'));
 
-app.post('/create', (req, res) => {
+app.post('/api/create', (req, res) => {
   console.log(req.body);
-  const name = req.body.name;
+  let { name } = req.body;
+  console.log(name);
+  // const name = req.body.name;
   const age = req.body.age;
   const country = req.body.country;
   const position = req.body.position;
@@ -27,13 +32,13 @@ app.post('/create', (req, res) => {
       if (err) {
         console.log(err);
       } else {
-        res.send('Values Inserted');
+        res.send('Values');
       }
     }
   );
 });
 
-app.get('/employees', (req, res) => {
+app.get('/api/employees', (req, res) => {
   db.query('SELECT * FROM employees', (err, result) => {
     if (err) {
       console.log(err);
@@ -43,7 +48,7 @@ app.get('/employees', (req, res) => {
   });
 });
 
-app.put('/update', (req, res) => {
+app.put('/api/update', (req, res) => {
   const id = req.body.id;
   const wage = req.body.wage;
   db.query(
@@ -59,7 +64,7 @@ app.put('/update', (req, res) => {
   );
 });
 
-app.delete('/delete/:id', (req, res) => {
+app.delete('/api/delete/:id', (req, res) => {
   const id = req.params.id;
   db.query('DELETE FROM employees WHERE id = ?', id, (err, result) => {
     if (err) {
