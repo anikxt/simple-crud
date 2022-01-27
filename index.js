@@ -45,7 +45,6 @@ app.get('/api/employees', (req, res) => {
 app.put('/api/update', (req, res) => {
   const id = req.body.id;
   const wage = req.body.wage;
-  console.log(id, wage, 'HELLOOOOO');
   db.query(
     'UPDATE employees SET wage = ? WHERE id = ?',
     [wage, id],
