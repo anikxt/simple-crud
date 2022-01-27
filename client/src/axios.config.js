@@ -1,7 +1,7 @@
 import Axios from 'axios';
 
 const axios = Axios.create({
-  baseURL: 'http://localhost:8080/',
+  baseURL: process.env.RAILWAY_STATIC_URL || 'http://localhost:8080/',
 });
 
 export default axios;
