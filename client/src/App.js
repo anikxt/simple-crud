@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import Axios from 'axios';
+import axios from './axios.config';
 
 function App() {
   const [name, setName] = useState('');
@@ -14,7 +14,7 @@ function App() {
 
   const addEmployee = async () => {
     try {
-      await Axios.post('https://simple-crud-production.up.railway.app/create', {
+      await axios.post('/create', {
         name: name,
         age: age,
         country: country,
@@ -38,16 +38,14 @@ function App() {
   };
 
   const getEmployees = () => {
-    Axios.get('https://simple-crud-production.up.railway.app/employees').then(
-      (response) => {
-        setEmployeeList(response.data);
-      }
-    );
+    axios.get('/employees').then((response) => {
+      setEmployeeList(response.data);
+    });
   };
 
   const updateEmployeeWage = async (id) => {
     try {
-      await Axios.put('https://simple-crud-production.up.railway.app/update', {
+      await axios.put('/update', {
         wage: newWage,
         id: id,
       });
@@ -72,9 +70,7 @@ function App() {
   };
 
   const deleteEmployee = (id) => {
-    Axios.delete(
-      `https://simple-crud-production.up.railway.app/delete/${id}`
-    ).then((response) => {
+    axios.delete(`delete/${id}`).then((response) => {
       setEmployeeList(
         employeeList.filter((val) => {
           return val.id !== id;
@@ -110,7 +106,6 @@ function App() {
           -----------------------------------------------------------------------------------------
           <button onClick={getEmployees}>Show Employees</button>
           {employeeList.map((val, key) => {
-            console.log(val, 'VAL');
             return (
               <div className="employee">
                 <div>

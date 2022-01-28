@@ -1,12 +1,8 @@
-import axios from 'axios';
+import Axios from 'axios';
 
-const baseURL = process.env.REACT_APP_RAILWAY_STATIC_URL;
-
-console.log('BASEURL: -> ', baseURL);
-
-const axiosInstance = axios.create({
-  baseURL: baseURL === 'development' ? 'localhost:8000' : '',
+const axios = Axios.create({
+  baseURL: 'https://simple-crud-production.up.railway.app',
   responseType: 'json',
 });
 
-export default axiosInstance;
+export default axios;
