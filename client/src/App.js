@@ -40,7 +40,6 @@ function App() {
   const getEmployees = () => {
     Axios.get('https://simple-crud-production.up.railway.app/employees').then(
       (response) => {
-        console('RESPONSEDATA -> ', response.data);
         setEmployeeList(response.data);
       }
     );
