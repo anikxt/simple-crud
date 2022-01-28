@@ -43,7 +43,7 @@ function App() {
     axios
       .get('https://simple-crud-production.up.railway.app/employees')
       .then((response) => {
-        setEmployeeList(response.data);
+        setEmployeeList([response.data]);
       });
   };
 
