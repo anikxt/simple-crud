@@ -12,7 +12,6 @@ app.use(bodyParser.json()); // support json encoded bodies
 const db = mysql.createConnection(process.env.MYSQL_URL);
 
 app.post('/create', (req, res) => {
-  console.log(req.body);
   let { name, age, country, position, wage } = req.body;
 
   db.query(

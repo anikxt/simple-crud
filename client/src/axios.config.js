@@ -1,9 +1,12 @@
-import Axios from 'axios';
+import axios from 'axios';
 
-const axios = Axios.create({
-  baseURL:
-    process.env.RAILWAY_STATIC_URL === 'development' ? 'localhost:8000' : '',
+const baseURL = process.env.REACT_APP_RAILWAY_STATIC_URL;
+
+console.log('BASEURL: -> ', baseURL);
+
+const axiosInstance = axios.create({
+  baseURL: baseURL === 'development' ? 'localhost:8000' : '',
   responseType: 'json',
 });
 
-export default axios;
+export default axiosInstance;
